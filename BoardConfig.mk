@@ -107,21 +107,26 @@ TW_THEME := portrait_hdpi
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TW_BRIGHTNESS_PATH := /sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness
-# TW_CUSTOM_BATTERY_PATH := /sys/devices/platform/bat_gm30/power_supply/battery
+TW_CUSTOM_BATTERY_PATH := /sys/devices/platform/bat_gm30/power_supply/battery
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone1/temp
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 128
 
 TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_NTFS_3G := true
 TW_INCLUDE_FUSE_EXFAT := true
 TW_INCLUDE_FUSE_NTFS := true
 TW_IGNORE_MISC_WIPE_DATA := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/recovery/root/init.recovery.ecarxp.rc
 TARGET_USES_MKE2FS := true
+TW_EXCLUDE_TWRPAPP := true
+TW_EXCLUDE_SUPERSU := true
 TW_USE_TOOLBOX := true
 TW_NO_SCREEN_BLANK := true
+TW_HAS_EDL_MODE := true
 TW_INCLUDE_FASTBOOTD := true
+TW_INCLUDE_APEX := true
 TW_NEW_ION_HEAP := true
 TW_SCREEN_BLANK_ON_BOOT := true
 
@@ -132,3 +137,59 @@ TW_DEFAULT_LANGUAGE := "zh_CN"
 # Debugging
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD    := true
+
+# PBRP specific flags
+PB_DISABLE_DEFAULT_DM_VERITY := true
+PB_DISABLE_DEFAULT_TREBLE_COMP := true
+
+################### ############################################
+# MANDATORY FLAGS # These flags HAVE TO be set/changed by you! #
+################### ############################################
+
+# Device codename
+# Default (if not set): N/A
+SHRP_DEVICE_CODE := IHU353G
+
+# Path of your SHRP device tree
+# Replace <device-brand> with the device brand name
+# (SHRP_DEVICE_CODE will expand to the above variable so check if that is correct)
+SHRP_PATH := device/ecarx/$(SHRP_DEVICE_CODE)
+
+# Maintainer name
+# Default (if not set): N/A
+SHRP_MAINTAINER := KB
+
+# Recovery Type (for "About" section only)
+# Default (if not set): N/A
+SHRP_REC_TYPE := Treble
+
+# Device Type (for "About" section only)
+# Default (if not set): N/A
+SHRP_DEVICE_TYPE := A_Only
+
+# Your device's recovery path, dont use blindly
+# Default (if not set): N/A
+SHRP_REC := /dev/block/platform/bootdevice/by-name/recovery
+
+# Use this flag only if SHRP_REC is set
+# Default (if not set): N/A
+SHRP_HAS_RECOVERY_PARTITION := true
+
+################### ################################################################################
+# IMPORTANT FLAGS # These are usually good to check - at least if the defaults are what you expect #
+################### ################################################################################
+
+# Flashlight: (0 = disable, 1 = enable)
+# Default (if not set): 0
+SHRP_FLASH := 1
+
+# Do not include the SHRP theming system
+# Useful to save space for devices with a smaller recovery partition
+# Default (if not set) is full theming support
+SHRP_LITE := true
+
+SHRP_SKIP_DEFAULT_ADDON_1 := true
+SHRP_SKIP_DEFAULT_ADDON_2 := true
+SHRP_SKIP_DEFAULT_ADDON_3 := true
+SHRP_SKIP_DEFAULT_ADDON_4 := true
+INC_IN_REC_MAGISK := true
